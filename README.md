@@ -7,12 +7,15 @@
 1) Номер телефону який не шкода на всяк випадок.
 2) Віртуальна картка з лімітом грошей на ній. 5$ поки достатньо.
 3) АВС аккаунт, там створи ACCESS KEY, обов'язково збережи його, він показується один раз.
- 3.1) Активуй зону Hong Kong (займає хвилин 5)
- 3.1) Перейди в цей регіон
+ 
+   3.1) Активуй зону Hong Kong (займає хвилин 5)
+   3.1) Перейди в цей регіон
+
 4) в сервісі KEY PAIRS створи .pem ключ, збережи його собі десь.
 5) І постав на машину собі terraform
+   
    5.1) В Windows powershell ранимо `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
-  5.2) Потім choco install terraform
+   5.2) Потім choco install terraform
 
 Для запуску:
 
