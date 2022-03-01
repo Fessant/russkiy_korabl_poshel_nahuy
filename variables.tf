@@ -1,7 +1,7 @@
 variable "website_to_attack" {
   type    = string
   description = "Here in default provide path to website which should be attacked. For example www.sberbank.ru"
-  default = "www.sberbank.ru"
+  default = "iecp.ru/ep/uc-list"
 }
 
 variable "pem_key_path" {
