@@ -15,9 +15,9 @@
 4) в сервісі KEY PAIRS створи .pem ключ, збережи його собі десь.
 5) І постав на машину собі terraform
    
-   5.1) В Windows powershell ранимо `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
+   5.1) В Windows powershell ранимо однією командою весь наступний виділений текст: `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
    
-   5.2) Потім choco install terraform
+   5.2) Потім ранимо в терміналі `choco install terraform`
 
 Для запуску:
 
