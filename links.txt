@@ -1,18 +1,4 @@
+178.124.146.147  25
+178.124.146.147  80
+178.124.146.147  443
 caa.gov.by
-ban.by
-aerovitebsk.ucoz.ru
-www.genex.by
-www.rubystar.by
-transaviaexport.com
-grodnoavia.com
-gomelavia.com
-izhavia.su
-airkem.ru
-kuf.aero
-flystw.com
-www.pulkovoairport.ru
-www.avia.vologda.ru
-www.belgorodavia.ru
-www.domodedovo.ru
-ivanovo.aero
-www.kazan.aero
