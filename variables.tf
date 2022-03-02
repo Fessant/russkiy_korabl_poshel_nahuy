@@ -1,9 +1,3 @@
-variable "website_to_attack" {
-  type    = string
-  description = "Here in default provide path to website which should be attacked. For example www.sberbank.ru"
-  default = "iecp.ru/ep/uc-list"
-}
-
 variable "pem_key_path" {
   description = "Here in default provide path to your .pem key. For example for windows - C:\\path\\to\\key\\aws_key.pem"
   default = "C:\\War\\aws_key.pem"
