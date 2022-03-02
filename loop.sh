@@ -15,7 +15,7 @@ while read link; do
     while read ip; do
         echo "Current target is $ip"
         HOSTNAME=$(echo $ip | awk -F ' ' '{print $1}')
-        PORT=$(echo $ip | awk -F ' ' '{print $2}')
+        PORT=$(echo $link | awk -F ' ' '{print $2}')
         echo "HOSTNAME $HOSTNAME"
         echo "PORT $PORT"
         sudo docker stop -t $1 $(sudo docker run -e HOSTNAME=$HOSTNAME -e PORT=$PORT -d --stop-signal 2 $IMAGE) &
