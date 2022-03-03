@@ -1,3 +1,18 @@
+# host init
+sudo yum -y update
+sudo yum search docker
+sudo yum -y install docker
+sudo systemctl start docker.service
+# host init
+
+# swop improvement
+sudo fallocate -l 4G /swapfile
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=4194304
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+# swop improvement
+
 IMAGE="dieputindie/ddos-ripper:latest"
 sudo docker pull $IMAGE
 
