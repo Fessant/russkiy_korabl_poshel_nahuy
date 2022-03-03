@@ -12,14 +12,14 @@
 0) Нову поштову адресу для АВС аккаунту на всяк випадок.
 0.1) Поставити на комп `aws cli` для Windows в powershell `msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi`
 1) Номер телефону який не шкода на всяк випадок.
-2) Віртуальна картка з лімітом грошей на ній. 5$ поки достатньо.
+2) Віртуальна картка (гривнєва обов'язково бо під час війни доллар не продається і її неможливо поповнити) з лімітом грошей на ній. 3$ для старту достатньо.
 3) АВС аккаунт, там створи ACCESS KEY, обов'язково збережи його, він показується один раз.
  
-   3.1) Активуй зону Hong Kong (займає хвилин 5)
+   3.1) Активуй зону Hong Kong (займає хвилин 5) Account > AWS Regions > Hong Kong - Enable
    
    3.1) Перейди в цей регіон
 
-4) в сервісі KEY PAIRS створи .pem ключ, збережи його собі десь.
+4) в сервісі KEY PAIRS створи .pem RSA ключ, збережи його собі десь.
 5) І постав на машину собі terraform
    
    5.1) В Windows powershell ранимо однією командою весь наступний виділений текст: `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
