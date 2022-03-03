@@ -38,10 +38,6 @@ resource "aws_spot_instance_request" "app_server" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo yum -y update",
-      "sudo yum search docker",
-      "sudo yum -y install docker",
-      "sudo systemctl start docker.service",
       "sudo chmod +x /tmp/loop.sh",
       "sudo bash /tmp/loop.sh ${var.attack_duration} ${var.enable_logs} ${var.remote_links}"
     ]
