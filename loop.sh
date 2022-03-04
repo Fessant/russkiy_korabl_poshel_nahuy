@@ -31,7 +31,7 @@ if file /tmp/links.txt | grep CRLF; then
 fi
 
 while read link; do
-    while [ $(sudo docker ps | wc -l) -gt 4 ]; do
+    while [ $(sudo docker ps | wc -l) -gt 3 ]; do
         sleep 60
     done
     echo "current link is $link"
@@ -45,11 +45,14 @@ while read link; do
 
     cat /tmp/ips.txt
     while read ip; do
+        while [ $(sudo docker ps | wc -l) -gt 3 ]; do
+            sleep 60
+        done
         echo "Current target is $ip"
         THIS_HOSTNAME=$(echo $ip | awk -F ' ' '{print $1}')
         THIS_PORT=$(echo $link | awk -F ' ' '{print $2}')
         sudo docker stop -t $1 $(sudo docker run -e THIS_HOSTNAME=$THIS_HOSTNAME -e THIS_PORT=$THIS_PORT -e ENABLE_LOG=$2 -d --stop-signal 2 $IMAGE) &
-        sleep 5
+        sleep 15
     done </tmp/ips.txt
 
 done </tmp/links.txt
