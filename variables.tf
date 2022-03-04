@@ -14,5 +14,5 @@ variable "enable_logs" {
 
 variable "remote_links"{
   type = string
-  default = "https://slvukrn.s3.ap-east-1.amazonaws.com/links.txt"
+  default = "https://dieputindie.s3.eu-north-1.amazonaws.com/links.txt"
 }
