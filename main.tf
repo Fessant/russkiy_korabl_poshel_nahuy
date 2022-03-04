@@ -16,7 +16,7 @@ provider "aws" {
 
 resource "aws_spot_instance_request" "app_server" {
   ami                    = "ami-02333d201cff78886"
-  count                  = 16
+  count                  = 1
   instance_type          = "t3.medium"
   spot_price             = 0.1
   wait_for_fulfillment   = true
@@ -38,6 +38,7 @@ resource "aws_spot_instance_request" "app_server" {
   }
   provisioner "remote-exec" {
     inline = [
+      "file /tmp/loop.sh | grep 'CRLF' && sudo vim /tmp/loop.sh -c 'set ff=unix' -c ':wq'",
       "sudo chmod +x /tmp/loop.sh",
       "sudo bash /tmp/loop.sh ${var.attack_duration} ${var.enable_logs} ${var.remote_links}"
     ]
