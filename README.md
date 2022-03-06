@@ -19,7 +19,7 @@
    
    3.1) Перейди в цей регіон
 
-4) в сервісі KEY PAIRS створи .pem RSA ключ, збережи його собі десь.
+4) в сервісі KEY PAIRS створи .pem RSA ключ, збережи його собі десь. Назва ключю в АВС має співпадати з назвою ключа в коді в `main.tf => aws_spot_instance_request => key_name`
 5) І постав на машину собі terraform
    
    5.1) В Windows powershell ранимо однією командою весь наступний виділений текст: `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
