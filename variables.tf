@@ -4,7 +4,16 @@ variable "pem_key_path" {
 }
 
 variable "attack_duration" {
+  description = "Value in milliseconds. 3600 == 1 hour"
   default = 3600
+}
+variable "watch_repeat" {
+  description = "Value in milliseconds. 1800 == 30 minutes"
+  default = 1800
+}
+variable "shutdown_hour" {
+  description = "Server will shutdown at particular time of day. 22 == will shutdown at 1 A.M. by moscow time (22:00 + 3:00 UTC == 1 A.M.)"
+  default = 22
 }
 
 variable "ami" {
@@ -22,11 +31,11 @@ variable "aws_region" {
 }
 
 variable "instance_count" {
-  default = "16"
+  default = "32"
 }
 
 variable "instance_type" {
-  default = "t3.micro"
+  default = "t3.large"
 }
 
 variable "enable_logs" {

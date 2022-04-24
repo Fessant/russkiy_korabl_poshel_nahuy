@@ -24,6 +24,10 @@ resource "aws_spot_instance_request" "app_server" {
   key_name               = "aws_key"
   vpc_security_group_ids = [aws_security_group.main.id]
 
+  root_block_device {
+    volume_size = 16
+  }
+
   tags = {
     Name = "Terraform-${count.index + 1}"
   }
@@ -36,11 +40,25 @@ resource "aws_spot_instance_request" "app_server" {
     source      = "loop.sh"
     destination = "/tmp/loop.sh"
   }
+  provisioner "file" {
+    source      = "download_links.sh"
+    destination = "/tmp/download_links.sh"
+  }
+  provisioner "file" {
+    source      = "vars.sh"
+    destination = "/tmp/vars.sh"
+  }
   provisioner "remote-exec" {
     inline = [
-      "file /tmp/loop.sh | grep 'CRLF' && sudo vim /tmp/loop.sh -c 'set ff=unix' -c ':wq'",
-      "sudo chmod +x /tmp/loop.sh",
-      "sudo bash /tmp/loop.sh ${var.attack_duration} ${var.enable_logs} ${var.remote_links}"
+      "find /tmp/ -type f \\( -iname \"*.sh\" \\) -exec sudo sed -i 's/\r$//' {} \\;",
+      "export ENABLE_LOG=${var.enable_logs} && echo \"ENABLE_LOG inline $ENABLE_LOG\" && export WGET_LINK=${var.remote_links} && envsubst < /tmp/vars.sh > /tmp/variables.sh && cat /tmp/variables.sh",
+      "sudo chmod +x /tmp/loop.sh /tmp/download_links.sh /tmp/vars.sh",
+      "echo '*/${var.watch_repeat} * * * * sudo /tmp/download_links.sh 2>&1 &>>/tmp/download.log &' | crontab -",
+      "crontab -l | { cat; echo '* ${var.shutdown_hour} * * * sudo shutdown now'; } | crontab -",
+      "sudo nohup bash /tmp/loop.sh ${var.attack_duration} 2>&1 &> /tmp/logs.out &", 
+      "sleep 5 && echo 'loop started' && ps aux | grep [l]oop",
+      "disown -a",
+      "echo 'remote-exec completed'"
     ]
   }
 
