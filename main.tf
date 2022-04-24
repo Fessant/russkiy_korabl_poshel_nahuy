@@ -11,13 +11,13 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "ap-east-1"
+  region  = var.aws_region
 }
 
 resource "aws_spot_instance_request" "app_server" {
-  ami                    = "ami-02333d201cff78886"
-  count                  = 25
-  instance_type          = "t3.large"
+  ami                    = lookup(var.ami, var.aws_region)
+  count                  = var.instance_count
+  instance_type          = var.instance_type
   spot_price             = 0.1
   wait_for_fulfillment   = true
   spot_type              = "one-time"
