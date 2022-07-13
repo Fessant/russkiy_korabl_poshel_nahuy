@@ -4,11 +4,11 @@ variable "pem_key_path" {
 }
 
 variable "attack_duration" {
-  description = "Value in milliseconds. 3600 == 1 hour"
+  description = "Value in seconds. 3600 == 1 hour"
   default = 3600
 }
 variable "watch_repeat" {
-  description = "Value in milliseconds. 1800 == 30 minutes"
+  description = "Value in seconds. 1800 == 30 minutes"
   default = 1800
 }
 variable "shutdown_hour" {
