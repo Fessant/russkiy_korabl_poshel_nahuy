@@ -77,7 +77,11 @@ Choose all free options tier what possible
 2) Wait for full initialization of incstance
 3) Choose your C2 instance => security => click your security group name => Click: Edit inbounds rules => Add rule => Type - ssh, Source - my IP.
 4) Connect to it
-5) Copy aws_key.pem to this EC2 (log off - type EXIT in terminal. At your pc type in one line `scp -i "c:/war/aws_key.pem" c:/war/aws_key.pem  ec2-user@ec2-YOUR-EC2-IP-HERE.ap-east-1.compute.amazonaws.com:/tmp/`
+5) Copy aws_key.pem to this EC2 (log off - type EXIT in terminal. At your pc type in one line `scp -i "c:/war/aws_key.pem" c:/war/aws_key.pem  ec2-user@ec2-YOUR-EC2-IP-HERE.ap-east-1.compute.amazonaws.com:/tmp/` 
+   5.1) WARNING: UNPROTECTED PRIVATE KEY FILE - problem? Execute next from this solution https://gist.github.com/jaskiratr/cfacb332bfdff2f63f535db7efb6df93:
+      `icacls.exe aws_key.pem /reset`
+      `icacls.exe aws_key.pem /grant:r "$($env:username):(r)"`
+      `icacls.exe aws_key.pem /inheritance:r`
 6) Login to the EC2 again.
 7) cd /tmp && sudo yum -y install git
 8) Download repo - git clone https://github.com/Fessant/russkiy_korabl_poshel_nahuy.git
