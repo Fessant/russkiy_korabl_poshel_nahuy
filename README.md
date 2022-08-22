@@ -77,15 +77,15 @@ Choose all free options tier what possible
 2) Wait for full initialization of incstance
 3) Choose your C2 instance => security => click your security group name => Click: Edit inbounds rules => Add rule => Type - ssh, Source - my IP.
 4) Connect to it
-5) Copy aws_key.pem to this EC2 (log off - type EXIT in terminal. At your pc type in one line `scp -i "c:/war/aws_key.pem" c:/war/aws_key.pem  ec2-user@ec2-YOUR-EC2-IP-HERE.ap-east-1.compute.amazonaws.com:/tmp/` 
+5) Copy aws_key.pem to this EC2 (log off - type EXIT in terminal. At your pc type in one line `scp -i "c:/war/aws_key.pem" c:/war/aws_key.pem  ec2-user@ec2-YOUR-EC2-IP-HERE.ap-east-1.compute.amazonaws.com:/home/ec2-user/` 
    5.1) WARNING: UNPROTECTED PRIVATE KEY FILE - problem? Execute next from this solution https://gist.github.com/jaskiratr/cfacb332bfdff2f63f535db7efb6df93:
       `icacls.exe aws_key.pem /reset`
       `icacls.exe aws_key.pem /grant:r "$($env:username):(r)"`
       `icacls.exe aws_key.pem /inheritance:r`
 6) Login to the EC2 again.
-7) cd /tmp && sudo yum -y install git
+7) cd /home/ec2-user && sudo yum -y install git
 8) Download repo - git clone https://github.com/Fessant/russkiy_korabl_poshel_nahuy.git
-9) cd /tmp/russkiy_korabl_poshel_nahuy
+9) cd /home/ec2-user/russkiy_korabl_poshel_nahuy
 10) Install terraform
 `sudo yum install -y yum-utils`
 `sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo`
@@ -94,7 +94,7 @@ Choose all free options tier what possible
 12) When everything will be fine add cron job:
 Run: `crontab -e`
 `INSERT`
-paste in window in one line next: `00 06 * * * cd /tmp/russkiy_korabl_poshel_nahuy && terraform apply -var instance_count=16 -var pem_key_path=/tmp/aws_key.pem -auto-approve` 
+paste in window in one line next: `00 06 * * * cd /home/ec2-user/russkiy_korabl_poshel_nahuy && terraform apply -var instance_count=16 -var pem_key_path=/home/ec2-user/aws_key.pem -auto-approve` 
 then press `ESC` `:wq` `ENTER`
 13) Ensure that crontab set properly. Run: `crontab -l`
 Тепер ваш Мастер інстанс буде жити цілодобово, і кожен день о шостій ранку по серверу - `00 06 * * *` + 3 години по UTC, тобто о 9:00 по мордору, буде запускати 16 віртуалок з ДДОСом. Які в свою чергу о першій ночі по мордору будуть гаситися. І так по колу.
